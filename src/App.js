@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import Layout from './components/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 class App extends Component {
   render() {
     return (
       <Layout>
-        <p>Almost before we knew it, we had left the ground.</p>
-        <p style={{ fontFamily: 'sans-serif'}}>Almost before we knew it, we had left the ground.</p>
+        <BurgerBuilder/>
       </Layout>
     );
   }
