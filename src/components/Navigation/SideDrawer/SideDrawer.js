@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './SideDrawer.css';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
-import Aux from '../../../hoc/Auxi';
+import Aux from '../../../hoc/Aux/Auxi';
 import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const SideDrawer = ({open, closed}) => {

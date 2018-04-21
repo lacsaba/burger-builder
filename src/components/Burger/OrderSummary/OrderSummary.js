@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Aux from '../../../hoc/Auxi';
+import Aux from '../../../hoc/Aux/Auxi';
 import Button from '../../UI/Button/Button';
 
 const OrderSummary = ({ingredients, price, purchaseCanceled, purchaseContinued}) => {
