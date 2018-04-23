@@ -78,7 +78,7 @@ class BurgerBuilder extends Component {
         name: 'Csaba Lakatos',
         address: {
           street: 'Street',
-          zipCode: '234234',
+          zipCode: '343434',
           country: 'Hungary'
         },
         email: 'test@test.com'
