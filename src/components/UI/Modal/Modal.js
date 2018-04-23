@@ -8,7 +8,8 @@ import classes from './Modal.css';
 class Modal extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.show !== this.props.show;
+    return nextProps.show !== this.props.show
+      || nextProps.children !== this.props.children;
   }
 
   render() {
@@ -30,7 +31,10 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ])
 };
 
 export default Modal;
