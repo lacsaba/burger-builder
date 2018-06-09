@@ -14,35 +14,40 @@ class ContactData extends Component {
         elementConfig: {
           type: 'text',
           placeholder: 'Your name'
-        }
+        },
+        value: ''
       },
       street: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Street'
-        }
+        },
+        value: ''
       },
       zipCode: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'ZIP Code'
-        }
+        },
+        value: ''
       },
       country: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Country'
-        }
+        },
+        value: ''
       },
       email: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Your E-mail'
-        }
+        },
+        value: ''
       },
       deliveryMethod: {
         elementType: 'select',
@@ -51,7 +56,8 @@ class ContactData extends Component {
             {value: 'fastest', displayValue: 'Fastest'},
             {value: 'cheapest', displayValue: 'Cheapest'}
           ]
-        }
+        },
+        value: ''
       }
     },
     loading: false
@@ -75,6 +81,16 @@ class ContactData extends Component {
       });
   };
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    let updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    let updatedFormElement = {...updatedOrderForm[inputIdentifier]};
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({orderForm: updatedOrderForm});
+  };
+
   render() {
     let formElementsArray = [];
 
@@ -95,6 +111,7 @@ class ContactData extends Component {
               elementType={formElement.config.elementType}
               elementConfig={formElement.config.elementConfig}
               value={formElement.config.value}
+              changed={(event) => this.inputChangedHandler(event, formElement.id)}
             />
           ))}
           <Button type="Success" clicked={this.orderHandler}>ORDER</Button>
