@@ -14,16 +14,11 @@ import * as burgerBuilderActions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   };
 
   componentDidMount() {
-    //axiosOrders.get('/ingredients.json')
-    //  .then(response => {
-    //    this.setState({ingredients: response.data});
-    //  });
+    this.props.onInitIngredients();
   }
 
   isPurchasable(ingredients) {
@@ -47,7 +42,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const {ingredients, totalPrice} = this.props;
+    const {error, ingredients, totalPrice} = this.props;
     let {purchasing} = this.state;
     let disabledInfo = {...ingredients};
 
@@ -56,7 +51,7 @@ class BurgerBuilder extends Component {
     }
 
     let orderSummary = null;
-    let burger = <Spinner/>;
+    let burger = error ? <p>Ingredients can't be loaded!</p> : <Spinner/>;
 
     if (ingredients) {
       burger =
@@ -79,10 +74,6 @@ class BurgerBuilder extends Component {
       />;
     }
 
-    if (this.state.loading) {
-      orderSummary = <Spinner/>
-    }
-
     return (
       <Aux>
         <Modal show={purchasing} modalClosed={this.purchaseCancelHandler}>
@@ -101,14 +92,16 @@ BurgerBuilder.propTypes = {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    error: state.error
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: (ingredientName) => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
-    onIngredientRemoved: (ingredientName) => dispatch(burgerBuilderActions.removeIngredient(ingredientName))
+    onIngredientRemoved: (ingredientName) => dispatch(burgerBuilderActions.removeIngredient(ingredientName)),
+    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
   }
 };
 
