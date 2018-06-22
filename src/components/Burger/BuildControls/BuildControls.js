@@ -11,7 +11,7 @@ const controls = [
   {label: 'Meat', type: 'meat'}
 ];
 
-const BuildControls = ({disabled, ingredientAdded, ingredientRemoved, ordered, price, purchasable}) => (
+const BuildControls = ({disabled, ingredientAdded, ingredientRemoved, isAuthenticated, ordered, price, purchasable}) => (
     <div className={classes.BuildControls}>
       <p>Current price: <strong>{price.toFixed(2)} $</strong></p>
       {controls.map(ctrl =>
@@ -26,7 +26,7 @@ const BuildControls = ({disabled, ingredientAdded, ingredientRemoved, ordered, p
       <button
         className={classes.OrderButton}
         disabled={!purchasable}
-        onClick={ordered}>ORDER NOW</button>
+        onClick={ordered}>{isAuthenticated ? 'ORDER NOW' : 'SIGN UP TO ORDER'}</button>
     </div>
   );
 
@@ -34,6 +34,7 @@ BuildControls.propTypes = {
   disabled: PropTypes.objectOf(Boolean).isRequired,
   ingredientAdded: PropTypes.func.isRequired,
   ingredientRemoved: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   ordered: PropTypes.func,
   price: PropTypes.number.isRequired,
   purchasable: PropTypes.bool

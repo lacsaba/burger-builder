@@ -14,7 +14,8 @@ const reducer = (state = initialState, action) => {
 const initialState = {
   ingredients: null,
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false
 };
 
 const INGREDIENT_PRICES = {
@@ -37,7 +38,8 @@ const cumulateIngredient = (state, action, operator) => {
   const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
   const updatedState = {
     ingredients: updatedIngredients,
-    totalPrice: state.totalPrice + (operator === 'add' ? INGREDIENT_PRICES[action.ingredientName] : -INGREDIENT_PRICES[action.ingredientName])
+    totalPrice: state.totalPrice + (operator === 'add' ? INGREDIENT_PRICES[action.ingredientName] : -INGREDIENT_PRICES[action.ingredientName]),
+    building: true
   };
 
   return updateObject(state, updatedState);
@@ -52,7 +54,8 @@ const setIngredients = (state, action) => ({
     meat: action.ingredients.meat
   },
   error: false,
-  totalPrice: initialState.totalPrice
+  totalPrice: initialState.totalPrice,
+  building: false
 });
 
 export default reducer;
