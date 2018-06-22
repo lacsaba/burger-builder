@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -22,8 +23,13 @@ class Layout extends Component {
   render() {
     return (
       <Aux>
-        <Toolbar toggle={this.sideDraweToggleHandler}/>
-        <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}/>
+        <Toolbar
+          toggle={this.sideDraweToggleHandler}
+          isAuthenticated={this.props.isAuthenticated}/>
+        <SideDrawer
+          open={this.state.showSideDrawer}
+          closed={this.sideDrawerClosedHandler}
+          isAuthenticated={this.props.isAuthenticated}/>
         <main className={classes.Content}>
           {this.props.children}
         </main>
@@ -36,4 +42,8 @@ Layout.propTypes = {
   //myProp: PropTypes.object.isRequired
 };
 
-export default Layout;
+const mapStateToProps = state => ({
+  isAuthenticated: !!state.auth.token
+});
+
+export default connect(mapStateToProps)(Layout);

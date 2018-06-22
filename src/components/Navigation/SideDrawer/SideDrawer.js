@@ -7,7 +7,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import Aux from '../../../hoc/Aux/Auxi';
 import Backdrop from "../../UI/Backdrop/Backdrop";
 
-const SideDrawer = ({open, closed}) => {
+const SideDrawer = ({open, closed, isAuthenticated}) => {
   const attachedClasses = [
     classes.SideDrawer,
     open ? classes.Open : classes.Close
@@ -21,7 +21,7 @@ const SideDrawer = ({open, closed}) => {
           <Logo/>
         </div>
         <nav>
-          <NavigationItems/>
+          <NavigationItems isAuthenticated={isAuthenticated}/>
         </nav>
       </div>
     </Aux>
@@ -30,7 +30,8 @@ const SideDrawer = ({open, closed}) => {
 
 SideDrawer.propTypes = {
   closed: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default SideDrawer;
