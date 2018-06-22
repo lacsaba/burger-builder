@@ -12,7 +12,7 @@ const Button = ({children, clicked, disabled, type}) => (
 );
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.any,
   clicked: PropTypes.func,
   disabled: PropTypes.bool,
   type: PropTypes.string
