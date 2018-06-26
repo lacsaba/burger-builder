@@ -7,6 +7,7 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {checkValidity, updateObject} from "../../shared/utility";
 
 class Auth extends Component {
   state = {
@@ -49,34 +50,14 @@ class Auth extends Component {
     }
   }
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event, controlName) => {
-    let updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName], {
         value: event.target.value,
-        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+        valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
         touched: true
-      }
-    };
+      })
+    });
 
     this.setState({controls: updatedControls});
   };
@@ -115,7 +96,7 @@ class Auth extends Component {
     ));
 
     if (loading) {
-      form = <Spinner />;
+      form = <Spinner/>;
     }
 
     let errorMessage = null;
@@ -128,7 +109,7 @@ class Auth extends Component {
 
     let authRedirect = null;
     if (isAuthenticated) {
-      authRedirect =  <Redirect to={authRedirectPath}/>;
+      authRedirect = <Redirect to={authRedirectPath}/>;
     }
 
     return (
