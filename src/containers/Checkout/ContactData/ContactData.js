@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from "prop-types";
 
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
@@ -9,91 +10,11 @@ import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions';
 import {checkValidity, updateObject} from "../../../shared/utility";
+import orderForm from './formConfig';
 
 class ContactData extends Component {
   state = {
-    orderForm: {
-      name: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: 'Your name'
-        },
-        value: '',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      street: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: 'Street'
-        },
-        value: '',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      zipCode: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: 'ZIP Code'
-        },
-        value: '',
-        validation: {
-          required: true,
-          minLength: 5,
-          maxLength: 5
-        },
-        valid: false,
-        touched: false
-      },
-      country: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: 'Country'
-        },
-        value: '',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
-      email: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'email',
-          placeholder: 'Your E-mail'
-        },
-        value: '',
-        validation: {
-          required: true,
-          isEmail: true
-        },
-        valid: false,
-        touched: false
-      },
-      deliveryMethod: {
-        elementType: 'select',
-        elementConfig: {
-          options: [
-            {value: 'fastest', displayValue: 'Fastest'},
-            {value: 'cheapest', displayValue: 'Cheapest'}
-          ]
-        },
-        value: 'fastest',
-        validation: {},
-        valid: true
-      }
-    },
+    orderForm,
     formIsValid: false
   };
 
@@ -170,6 +91,15 @@ class ContactData extends Component {
     return form;
   }
 }
+
+ContactData.propTypes = {
+  ingredients: PropTypes.object,
+  totalPrice: PropTypes.number,
+  loading: PropTypes.bool,
+  token: PropTypes.string,
+  userId: PropTypes.string,
+
+};
 
 const mapStateToProps = state => {
   return {

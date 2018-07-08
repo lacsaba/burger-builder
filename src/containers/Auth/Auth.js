@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -127,6 +128,14 @@ class Auth extends Component {
     );
   }
 }
+
+Auth.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  building: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  isAuthenticated: PropTypes.bool.isRequired,
+  authRedirectPath: PropTypes.string
+};
 
 const mapStateToProps = state => ({
   loading: state.auth.loading,

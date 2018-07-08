@@ -39,7 +39,7 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-  //myProp: PropTypes.object.isRequired
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

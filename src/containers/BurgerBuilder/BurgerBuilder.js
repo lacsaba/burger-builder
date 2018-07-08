@@ -93,7 +93,10 @@ export class BurgerBuilder extends Component {
 }
 
 BurgerBuilder.propTypes = {
-  //myProp: PropTypes.string.isRequired
+  ingredients: PropTypes.object.isRequired,
+  totalPrice: PropTypes.number,
+  error: PropTypes.string,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {

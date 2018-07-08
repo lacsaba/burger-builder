@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from './ContactData/ContactData';
@@ -40,7 +41,10 @@ class Checkout extends Component {
   }
 }
 
-Checkout.propTypes = {};
+Checkout.propTypes = {
+  ingredients: PropTypes.object,
+  purchased: PropTypes.bool
+};
 
 const mapStateToProps = state => {
   return {
